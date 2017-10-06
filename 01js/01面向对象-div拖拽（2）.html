@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#box {
+				width: 100px;
+				height: 100px;
+				background-color: red;
+				position: absolute;
+				left: 100px;
+				top: 100px;
+			}
+			#box2 {
+				width: 200px;
+				height: 200px;
+				background-color: pink;
+				position: absolute;
+				left: 200px;
+				top: 200px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box"></div>
+		<div id="box2"></div>
+	</body>
+	<script>
+		
+		(function(w) {
+			function Drag(id) {
+			//把div元素作为构造函数的对象的属性
+			this.ele = document.getElementById(id);
+			//把需要的属性，初始化设置
+			this.disX = 0;
+			this.disY = 0;
+			this.fnDown();//按下方法在内部执行
+		}
+		
+		//给构造函数的原型上添加鼠标按下方法
+		Drag.prototype.fnDown = function() {
+			//存储当前函数的this
+			var that = this;
+			//给div添加鼠标按下事件
+			this.ele.onmousedown = function(e) {
+				e = e || event;
+				//当前的this指向this.ele
+				that.disX = e.clientX - this.offsetLeft;
+				that.disY = e.clientY - this.offsetTop;
+				
+				//给document添加鼠标移动事件
+				document.onmousemove = function(e){
+					that.fnMove(e);//移动方法
+				}
+				
+				//给文档添加鼠标弹起事件
+				document.onmouseup = that.fnUp;//弹起方法
+			}
+			return false;//取消浏览器默认行为
+		}
+		
+		//给构造函数原型添加一个移动方法
+		Drag.prototype.fnMove = function(e) {
+			e = e || event;
+			this.ele.style.left = e.clientX - this.disX + "px";
+			this.ele.style.top = e.clientY - this.disY + "px";
+		}
+		
+		//给构造函数原型添加一个鼠标弹起方法
+		Drag.prototype.fnUp = function() {
+			document.onmousemove = null;
+		}
+			w.Drag = Drag;//把构造函数挂载到window对象的属性上
+		})(window)
+		
+		
+		new window.Drag('box');//window可以省略
+		new Drag("box2");
+	</script>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			div div {
+				width: 280px;
+				height: 200px;
+				text-align: center;
+				border: 1px solid black;
+				line-height: 200px;
+				display: none;
+				font-size: 50px;
+		 	}
+		 	.active {
+		 		background: red;
+		 	}
+		</style>
+	</head>
+	<body>
+		<button>让第一个选项卡停止播放</button>
+		<button>让第二个选项卡自动播放</button>
+		<button>让第一个选项卡和第二个选项卡反转</button>
+		<div id="box">
+			<input type="button" value="按钮1" class="active" />
+			<input type="button" value="按钮2" />
+			<input type="button" value="按钮3" />
+			<div style="display: block;">内容1</div>
+			<div>内容2</div>
+			<div>内容3</div>
+		</div>
+		<div id="box2">
+			<input type="button" value="按钮1" class="active" />
+			<input type="button" value="按钮2" />
+			<input type="button" value="按钮3" />
+			<div style="display: block;">内容1</div>
+			<div>内容2</div>
+			<div>内容3</div>
+		</div>
+	</body>
+	<script src="tab.js"></script>
+	<script>
+		//获取到按钮
+		var but = document.getElementsByTagName('button');
+		var tab1 = new Tab('box');
+		tab1.autoPlay();
+		var tab2 = new Tab('box2');
+		
+		//点击按钮1的时候 ,自动播放停止
+		but[0].onclick = function() {
+			tab1.stop();
+		}
+		//点击按钮2的时候，自动播放
+		but[1].onclick = function() {
+			tab2.autoPlay();
+		}
+		//点击按钮3的时候，第一个跟第二个反转
+		but[2].onclick = function() {
+			if(tab1.isPlay) {
+				tab1.stop();
+			}else {
+				tab1.autoPlay();
+			}
+			if(tab2.isPlay) {
+				tab2.stop();
+			}else {
+				tab2.autoPlay();
+			}
+		}
+	</script>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#box {
+				width: 100px;
+				height: 100px;
+				background-color: red;
+				position: absolute;
+				left: 100px;
+				top: 100px;
+			}
+			#box2 {
+				width: 200px;
+				height: 200px;
+				background-color: pink;
+				position: absolute;
+				left: 200px;
+				top: 200px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box"></div>
+		<div id="box2"></div>
+	</body>
+	<script>
+		
+		(function(window) {
+			function Drag(id) {
+			//把div看成对象的一个属性
+			this.ele = document.getElementById(id);
+			//将需要添加的和设置的属性进行初始化设置
+			this.disX = 0;
+			this.disY = 0;
+			this.fnDown();//让方法在内部执行
+		}
+		//给当前的构造函数的原型上添加一个鼠标按下的方法
+		Drag.prototype.fnDown = function() {
+			//把 当前函数里面的this存一下
+			var that = this;
+			//给div元素添加鼠标按下事件
+			this.ele.onmousedown = function(e) {
+				e = e || event;
+				//获取固定距离
+				//这里如果用this指的是 this.ele 
+				that.disX = e.clientX - this.offsetLeft;
+				that.disY = e.clientY - this.offsetTop;
+				
+				//给document添加一个鼠标移动事件
+				document.onmousemove = function(e) {
+					that.fnMove(e);//移动方法调用
+				}
+				//给document添加一个鼠标弹起事件
+				document.onmouseup = that.fnUp;
+			}
+			return false;//取消默认行为
+		}  
+		
+		//给构造函数的原型上添加一个移动方法
+		Drag.prototype.fnMove = function(e) {
+			e = e || event;
+			//这里的this指向这个构造函数
+			this.ele.style.left = e.clientX - this.disX + 'px';
+			this.ele.style.top = e.clientY - this.disY + "px";
+		}
+		//给构造函数原型上添加一个鼠标弹起事件
+		Drag.prototype.fnUp = function() {
+			document.onmousemove = null;
+		}
+			window.Drag = Drag;//把构造函数挂载在window对象上，暴露出来
+		})(window)
+		
+		new window.Drag("box");//window可以省略
+		new Drag('box2');
+	</script>
+</html>
