@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#map {
+				width: 800px;
+				height: 600px;
+				margin: 0 auto;
+				position: relative;
+				background-color: #ccc;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="map"></div>
+	</body>
+	<script>
+		//食物对象
+		
+		(function(window) {
+			
+			function Food(width,height,x,y,color) {
+				this.width = width || 20;
+				this.height = height || 20;
+				this.x = x || 0;
+				this.y = y || 0;
+				this.color = color || "green";
+			}
+			Food.prototype.render = function(map) {
+				//食物的随机位置
+				this.x = parseInt(Math.random()*(map.offsetWidth/this.width))*this.width;
+				this.y = parseInt(Math.random()*(map.offsetHeight/this.height))*this.height;
+				//在页面上添加食物
+				var oDiv = document.createElement('div');
+				//设置食物的样式
+				oDiv.style.left = this.x + "px";
+				oDiv.style.top = this.y + "px";
+				oDiv.style.width = this.width+"px";
+				oDiv.style.height = this.height + "px";
+				oDiv.style.position = "absolute";
+				oDiv.style.backgroundColor = this.color;
+				//把食物添加到页面上
+				map.appendChild(oDiv);
+			}
+			
+			//把函数挂载到window对象上
+			window.Food = Food;
+		})(window);
+		
+		//蛇对象
+		(function(window) {
+			
+			//构造蛇的构造函数
+			function Snake(width,height,direction) {
+				this.width = width || 20;
+				this.height = height || 20;
+				this.body = [
+				 {x:3,y:2,color:"red"},
+				  {x:2,y:2,color:"orange"},
+				  {x:1,y:2,color:"orange"}
+				];
+				this.direction = direction || "right";
+			}
+			//让蛇生成，放置在页面上 render
+			Snake.prototype.render = function(map) {
+				//在页面上循环添加div
+				for(var i = 0; i < this.body.length; i++) {
+					var oDiv = document.createElement("div");
+					oDiv.style.width = this.width + "px";
+					oDiv.style.height = this.height + "px";
+					
+					//创建好的额div的偏移值
+					oDiv.style.left = this.body[i].x*this.width + "px";
+					oDiv.style.top = this.body[i].y*this.height + "px";
+					//设置定位
+					oDiv.style.position = "absolute";
+					oDiv.style.backgroundColor = this.body[i].color;
+					//把创建的div添加到页面上
+					map.appendChild(oDiv);
+				}
+			}
+			
+			window.Snake = Snake;
+		})(window);
+		
+		
+		
+		
+		//获取到地图
+		var oMap = document.getElementById('map');
+		var food = new Food();
+		food.render(oMap);
+		
+		var snake = new Snake();
+		snake.render(oMap);
+		
+		
+		
+	</script>
+</html>

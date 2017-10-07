@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#map {
+				width: 800px;
+				height: 600px;
+				background-color: #ccc;
+				position: relative;
+				margin: 0 auto;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="map"></div>
+	</body>
+	<script>
+//		食物立即执行函数
+		(function(window) {
+			
+			//食物构造函数对象
+			function Food(width,height,x,y,color) {
+				this.width = width || 20;//食物的宽
+				this.height = height || 20;//食物的高
+				this.x = x || 0;//食物的x轴位置
+				this.y = y || 0;//食物的y 轴位置
+				this.color = color || "green";//食物的颜色
+			}
+			
+			//给食物对象的原型上添加一个渲染方法
+			Food.prototype.render = function(map) {
+				
+				//在内存中创建一个div
+				var oDiv = document.createElement('div');
+				oDiv.style.width = this.width + "px";
+				oDiv.style.height = this.height + "px";
+				//设置定位
+				oDiv.style.position = "absolute";
+				//获取到食物的随机坐标
+				this.x = parseInt(Math.random()*(map.offsetWidth/this.width))*this.width;
+				this.y = parseInt(Math.random()*(map.offsetHeight/this.height))*this.height;
+				oDiv.style.left = this.x + "px";
+				oDiv.style.top = this.y + "px";
+				//颜色随机
+				this.color = "rgb("+Math.round(Math.random()*255)+","+Math.round(Math.random()*255)+","+Math.round(Math.random()*255)+")";
+				oDiv.style.backgroundColor = this.color;
+				
+				//把div添加到地图上
+				map.appendChild(oDiv);
+			}			
+			
+			window.Food = Food;//把食物对象挂载到window属性上
+		})(window);
+		
+		
+		//蛇的立即执行函数
+		(function(window) {
+			
+			//蛇对象
+			function Snake(width,height,direction) {
+				this.width = width || 20;
+				this.height = height || 20;
+				this.body = [
+					{x:3,y:2,color: "orange"},
+					{x:2,y:2,color: "pink"},
+					{x:1,y:2,color: "pink"}
+				];
+				this.direction = direction || "right";
+			}
+			
+			//给蛇对象的原型添加一个渲染方法
+			Snake.prototype.render = function(map) {
+				
+				//循环循环body.创建div
+				for(var i = 0; i < this.body.length; i++) {
+					var oDiv = document.createElement('div');
+					oDiv.style.width = this.width + "px";
+					oDiv.style.height = this.height + "px";
+					oDiv.style.position = "absolute";
+					oDiv.style.left = this.body[i].x*this.width + "px";
+					oDiv.style.top = this.body[i].y*this.height + "px";
+					oDiv.style.backgroundColor = this.body[i].color;;
+					//把创建的div添加到页面上
+					map.appendChild(oDiv);
+				}
+			}
+			
+			window.Snake = Snake;
+		})(window)
+		
+		//获取到地图
+		var oMap = document.getElementById('map');
+		var food = new Food();
+		food.render(oMap);//
+		
+		var snake = new Snake();
+		console.log(snake);
+		snake.render(oMap);
+	</script>
+</html>

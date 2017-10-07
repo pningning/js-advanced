@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#map {
+				width: 800px;
+				height: 600px;
+				background-color: #ccc;
+				position: relative;
+				margin: 0 auto;
+			}
+		</style>		
+	</head>
+	<body>
+		<div id="map"></div>
+	</body>
+	<script src="food.js"></script>
+	<script src="snake.js"></script>
+	<script>
+		
+		//游戏立即执行函数
+		(function(window) {
+			
+			//游戏对象
+			function Game(map) {
+				this.food = new Food();//把食物的实例对象作为游戏对象的属性
+				this.snake = new Snake();//把蛇的实例对象作为游戏对象的属性
+				this.map = map;//把地图作为游戏对象的属性
+			}
+			
+			//给游戏对象的原型添加一个一键开始方法
+			Game.prototype.start = function() {
+				this.food.render(this.map);//食物渲染
+				this.snake.render(this.map);///蛇渲染
+			}
+			
+			window.Game = Game;
+		})(window)
+		
+		
+		var oMap = document.getElementById("map");
+		var game = new Game(oMap);
+		game.start();
+		
+	</script>
+</html>
