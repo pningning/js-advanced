@@ -80,7 +80,7 @@ function bind(obj,evType,evFn) {
 						case 40:
 						that.snake.direction = "down";
 					}
-				})
+				});
 			}
 			
 			window.Game = Game;

@@ -1,0 +1,149 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box {
+            width: 380px;
+            height: 250px;
+            background-color: #ccc;
+            padding: 30px;
+            margin: 50px auto;
+        }
+
+        span {
+            font-size: 12px;
+        }
+        #strong {
+            margin-top: 5px;
+            height: 16px;
+        }
+    </style>
+  
+    
+</head>
+
+<body>
+    <div id="box">
+        QQ号：<input type="text" id="txtQQ"><span></span><br><br> 邮&nbsp;&nbsp;箱：
+        <input type="text" id="txtEMail"><span></span><br><br> 手&nbsp;&nbsp;机：
+        <input type="text" id="txtPhone"><span></span><br><br> 生&nbsp;&nbsp;日：
+        <input type="text" id="txtBirthday"><span></span><br><br> 姓&nbsp;&nbsp;名：
+        <input type="text" id="txtName"><span></span><br><br>密码强度:
+        <input type="password" id="txtPassword"><span></span><div id="strong"></div>
+    </div>
+
+</body>
+	<script>
+		var aInt = document.getElementsByTagName('input');
+		var aSpan = document.getElementsByTagName("span");
+		aInt[0].onblur = function() {
+			var reQQ = /^[1-9]\d{4,10}$/;
+			if(aInt[0].value ==="") {
+				aSpan[0].innerHTML = "请输入内容";
+			} else {
+					if(reQQ.test(this.value)) {
+					aSpan[0].innerHTML = "恭喜填写正确";
+					aSpan[0].style.color = "green";
+				}else {
+					aSpan[0].innerHTML = "请输入正确的qq";
+					aSpan[0].style.color = "red";
+				}
+			}
+		}
+		
+		aInt[1].onblur = function() {
+			var reEmali = /^[\da-zA-Z][\w]+@[\da-z]{2,6}(\.[a-z]{2,3}){1,3}$/;
+//						  /^[\da-zA-Z][\w-]+@[\da-z]{2,6}(\.[a-z]{2,3}){1,3}$/
+			if(this.value === "") {
+				aSpan[1].innerHTML = "请输入内容";
+			}else {
+				if(reEmali.test(this.value)) {
+					aSpan[1].innerHTML = "恭喜填写正确";
+					aSpan[1].style.color = "green";
+				}else {
+					aSpan[1].innerHTML = "请输入正确的邮箱";
+					aSpan[1].style.color = "red";
+				}
+			}
+		}
+		aInt[2].onblur = function() {
+			var reTel = /^1\d{10}$/;
+			if(this.value === "") {
+				aSpan[2].innerHTML = "请输入内容";
+			}else {
+				if(reTel.test(this.value)) {
+					aSpan[2].innerHTML = "恭喜填写正确";
+					aSpan[2].style.color = "green";
+				}else {
+					aSpan[2].innerHTML = "请输入正确的手机号";
+					aSpan[2].style.color = "red";
+				}
+			}
+		}
+		
+		aInt[3].onblur = function() {
+			var reDay = /^[12]\d{3}-[01][\d]-[0-2][\d]$/;
+			if(this.value === "") {
+				aSpan[3].innerHTML = "请输入内容";
+			}else {
+				if(reDay.test(this.value)) {
+					aSpan[3].innerHTML = "恭喜填写正确";
+					aSpan[3].style.color = "green";
+				}else {
+					aSpan[3].innerHTML = "请输入正确的手机号";
+					aSpan[3].style.color = "red";
+				}
+			}
+		}
+		aInt[4].onblur = function() {
+			var reName = /^[\u4e00-\u9fa5]{2,4}$/;
+			if(this.value === "") {
+				aSpan[4].innerHTML = "请输入内容";
+			}else {
+				if(reName.test(this.value)) {
+					aSpan[4].innerHTML = "恭喜填写正确";
+					aSpan[4].style.color = "green";
+				}else {
+					aSpan[4].innerHTML = "请输入正确的手机号";
+					aSpan[4].style.color = "red";
+				}
+			}
+		}
+		
+		aInt[5].oninput = function() {
+			var reWord = /^[\da-zA-Z]{4,12}$/;
+			if(this.value.length >=13 || this.value.length <=3) {
+				aSpan[5].innerHTML = "请输人3-12位数字和字母组合的密码";
+			}else if(this.value.length>3&&this.value.length<13){
+				if(reWord.test(this.value)) {
+					aSpan[5].innerHTML = "输入正确";
+				}
+			}
+		}
+		
+//		if(this.value.length >= 15 || this.value.length <=3) {
+//                  $('strong').style.backgroundColor = "";
+//                  return next(this).innerHTML = '密码长度不符合规则';
+//              } else if(this.value.length >= 3 && this.value.length <=5) {
+//                  $('strong').style.width = '50px';
+//              } else if (this.value.length >= 6 && this.value.length <=10) {
+//                  $('strong').style.width = '100px';
+//              } else {
+//                  $('strong').style.width = '150px';
+//              }
+//		//给所有的input添加失去焦点事件
+//		for(var i = 0; i < aInt.length; i++) {
+//			aInt[i].index = i;
+//			aInt[i].onblur = function() {
+//				if(this.value === "") {
+//					aSpan[this.index].innerHTML = "请输入内容";
+//				}
+//			}
+//		}
+	</script>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script>
+		var str = '菲称仁爱礁附近17艘中国船均在菲监视之下';
+		// 菲   中国船   监视之下
+		
+		var re = /菲|中国船|监视之下/g;
+		var result = str.replace(re,function($0) {
+			var str = "";
+			for(var i = 0; i < $0.length; i++) {
+				str +="*";
+			}
+			return str;
+		});
+		console.log(result);
+	</script>
+</html>

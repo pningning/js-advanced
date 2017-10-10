@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+	</body>
+	<script>
+		var str = 'haj123sdk54hask33dknalsd789';
+		var arr = [];
+		var temp = "";
+		for(var i = 0; i < str.length; i++) {
+			if(str[i] >= 0 && str[i] <=9) {
+				temp += str[i];
+			}else {
+				if(temp) {
+					arr.push(temp);
+					temp = "";
+				}
+			}
+		}
+		
+		//最后走完再判断一次，temp是否有内容
+		if(temp) {
+					arr.push(temp);
+				}
+		console.log(arr);
+	</script>
+</html>

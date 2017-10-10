@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box {
+            width: 380px;
+            height: 250px;
+            background-color: #ccc;
+            padding: 30px;
+            margin: 50px auto;
+        }
+
+        span {
+            font-size: 12px;
+        }
+        #strong {
+            margin-top: 5px;
+            height: 16px;
+        }
+    </style>
+  
+    
+</head>
+
+<body>
+    <div id="box">
+        QQ号：<input type="text" id="txtQQ"><span></span><br><br> 邮&nbsp;&nbsp;箱：
+        <input type="text" id="txtEMail"><span></span><br><br> 手&nbsp;&nbsp;机：
+        <input type="text" id="txtPhone"><span></span><br><br> 生&nbsp;&nbsp;日：
+        <input type="text" id="txtBirthday"><span></span><br><br> 姓&nbsp;&nbsp;名：
+        <input type="text" id="txtName"><span></span><br><br>密码强度:
+        <input type="password" id="txtPassword"><span></span><div id="strong"></div>
+    </div>
+
+</body>
+	<script>
+		function $(id) {
+			return document.getElementById(id);
+		}
+		function next() {
+			
+		}
+		//获取事件相关元素
+		var arrt = [$("txtQQ"),$("txtEMail"),$("txtPhone"),$("txtBirthday"),$("txtName"),$("txtPassword")];
+		var aSpan = document.getElementsByTagName("span");
+		//给所有的input添加失去焦点事件
+		for(var i = 0; i < arrt.length; i++) {
+			arrt[i].intex = i;
+			arrt[i].onblur = function() {
+				textFn(this,aSpan[this.intex]);
+			}
+			
+		}
+		
+		//失去焦点的时候判断是否内容为空，如果内容为空提示填写内容
+		function textFn(ele,span) {
+			if(ele.value === "") {
+				return span.innerHTML = "请输入内容";
+			}
+		}
+	</script>
+</html>

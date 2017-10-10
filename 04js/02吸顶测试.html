@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#box {
+				width: 800px;
+				height: 800px;
+				background-color: red;
+				margin: 0 auto;
+			}
+			#box1 {
+				width: 800px;
+				height: 800px;
+				background-color: pink;
+				margin: 0 auto;
+			}
+			#box2 {
+				width: 30px;
+				height: 30px;
+				background-color: green;
+				position: fixed;
+				right: 0;
+				top: 600px;
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box"></div>
+		<div id="box1"></div>
+		<div id="box2"></div>
+	</body>
+	<script>
+		var oBox1 = document.getElementById('box');
+		var oBox3 = document.getElementById('box1');
+		
+		var oBox2 = document.getElementById('box2');
+		
+		var scrollT = 0;
+		
+		window.onscroll = function() {
+		scrollT = document.documentElement.scrollTop || document.body.scrollTop;
+//			console.log(scrollT);
+			console.log(scrollT);
+		if(scrollT > 0) {
+			oBox2.style.display = "block";
+			oBox2.onclick = function() {
+				oBox2.style.display = "none";
+				
+			}
+		} else {
+			oBox2.style.display = "none";
+		}
+		}
+//		console.log(scrollT);
+//		if(scrollT > 0) {
+//			oBox2.style.display = "block";
+//		}
+	</script>
+</html>

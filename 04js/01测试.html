@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script>
+		
+		//查看原型
+		function Proson(name,age) {
+			this.name = name;
+			this.age = age;
+		}
+		
+		var p1 = new Proson("zs",18);
+		console.dir(p1);
+		console.dir(Proson);
+		
+		//闭包的功能测试
+		function fn(a) {
+			return function(b) {
+				a = a+b
+				console.log(a);
+			};
+		}
+		
+		var cc = fn(2);
+		cc(2);
+		cc(2);
+	</script>
+</html>

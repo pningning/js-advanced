@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#text,#box {
+				width: 400px;
+				height: 300px;
+				border: 1px solid black;
+			}
+		</style>
+	</head>
+	<body>
+		<input type="button" value="提取小说" /><br />
+		<textarea id="text"></textarea>
+		<p>下面是提取后的文本内容</p>
+		<div id="box">
+			
+		</div>
+	</body>
+	<script type="text/javascript">
+		var oBtn = document.getElementsByTagName("input")[0];
+		var oText = document.getElementById('text');
+		var oBox = document.getElementById('box');
+		console.log(oBtn);
+		
+		oBtn.onclick = function() {
+			var str = oText.value;
+		var  re = /<[^>]+>/g;
+		var result = str.replace(re,"");
+		oBox.innerHTML = result;
+		}
+		
+		
+		
+	</script>
+</html>
